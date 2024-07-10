@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'Markazi Text';
+    src: url(/public/fonts/Markazi-Text/MarkaziText-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: 'Karla';
+    src: url(/public/fonts/Karla/Karla-VariableFont_wght.ttf);
+}
+@font-face{
+    font-family: 'Karla-ExtraBold';
+    src: url(/public/fonts/Karla/Karla-static/Karla-ExtraBold.ttf);
+}
+
+
+section{
+    margin:0px;
+    padding: 0px;
+}
+.header{
+    font-size: 40px;
+    font-family: 'Markazi Text', serif;
+}
+
+
+.hero {
+    background-color: #495D57;
+    color: white;
+    margin: 0px;
+    padding: 1% 10% 2% 10%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+h1.hero__title{
+    font-family: 'Markazi Text', serif;
+    font-size: 64px;
+    color: #F3CD17;
+    font-weight: medium;
+    margin: 0px;
+    padding: 0px
+}
+.hero__subtitle{
+    font-family: 'Markazi Text', serif;
+    font-size: 40px;
+    color: white;
+    font-weight: medium;
+}
+.hero p{
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    font-weight: medium;
+    color: white;
+    width: 75%;
+}
+
+
+.specials {
+    background-color: #F8F9FA;
+    padding: 20px 100px;
+}
+.specials-header {
+    font-family: 'Markazi Text', serif;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.specials__title{
+    margin-top: auto
+}
+.specials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.specials__item{
+    margin:10px;
+    padding: 20px;
+    background-color: #D9D9D9 ;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.item-header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.specials__item-title{
+    font-family: 'Markazi Text', serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+.specials__item-price{
+    font-family: 'Karla', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #EE9972;
+}
+.specials__item-description{
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+    color:#495D57;
+}
+.delivery{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: auto;
+}
+.delivery h3{
+    font-family: 'Karla-ExtraBold', sans-serif;
+    font-size: 20px;
+}
+.scooter{
+    width:50px;
+    height: 50px;
+}
+
+
+.home-about{
+    background-color: #6d6c6cb8;
+    color:white;
+    margin: 0px;
+    padding: 20px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.home-about h1{
+    color: #495D57;
+    
+}
+
+
+.reviews{
+    background-color: #D9D9D9;
+    padding: 20px 100px;
+}
+.review-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+.review{
+    background-color: #F8F9FA ;
+    margin: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px
+}
+.review-title{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.review-title h4{
+    font-family:'Markazi Text', serif;
+    font-size: 30px;
+    font-weight: regular;
+}
+.review h3{
+    font-family: 'Markazi Text', serif;
+    font-size: 30px;
+    font-weight: bold;
+}

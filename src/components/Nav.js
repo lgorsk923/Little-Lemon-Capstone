@@ -1,11 +1,12 @@
-import namelogo from '../images/name-and-logo.png';
+import nameLogo from '../images/name_and_logo.png';
+import './Nav.css';
 export function Nav() {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
-                        <img src={namelogo} alt="" width="230" height="75" className="d-inline-block align-text-top" />
+                        <img src={nameLogo} alt="" width="230" height="75" className="d-inline-block align-text-top" />
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

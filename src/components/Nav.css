@@ -1,0 +1,9 @@
+li{
+    font-family: Karla, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+.btn-outline-success{
+    color: #495D57;
+    border-color: #495D57;
+}

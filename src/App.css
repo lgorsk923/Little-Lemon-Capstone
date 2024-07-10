@@ -41,3 +41,17 @@ nav li {
   display: inline;
   padding: 10px;
 }
+
+@font-face {
+  font-family: 'Karla' ;
+  src: url(/public/fonts/Karla/Karla-VariableFont_wght.ttf);
+}
+.btn-warning{
+  background-color: #F3CD17;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  font-weight: medium;
+  border-radius: 16px;
+  margin: 10px 0px;
+  box-shadow: 2px 2px 2px #D9D9D9;
+}
