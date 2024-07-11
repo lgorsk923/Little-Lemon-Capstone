@@ -1,5 +1,6 @@
 import silhouetteBorder from '../images/silouhette-logo-border.png';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 export function Footer() {
     return (
         <>
@@ -17,16 +18,16 @@ export function Footer() {
                     </div>
                     <div className="col-6 col-md">
                         <ul className="list-unstyled text-small">
-                            <li className="mb-1"><a className="link-light text-decoration-none" href="#">Home</a></li>
-                            <li className="mb-1"><a className="link-light text-decoration-none" href="#about">About</a></li>
-                            <li className="mb-1"><a className="link-light text-decoration-none" href="#login">Login/Sign Up</a></li>
+                            <li className="mb-1"><Link className="link-light text-decoration-none" to="/">Home</Link></li>
+                            <li className="mb-1"><Link className="link-light text-decoration-none" to="/About">About</Link></li>
+                            <li className="mb-1"><Link className="link-light text-decoration-none" to="/Login-Signup">Login/Sign Up</Link></li>
                         </ul>
                     </div>
                     <div className="col-6 col-md">
                         <ul className="list-unstyled text-small">
-                            <li className="mb-1"><a className="link-light text-decoration-none" href="#menu">Menu</a></li>
-                            <li className="mb-1"><a className="link-light text-decoration-none" href="#order">Order</a></li>
-                            <li className="mb-1"><a className="link-light text-decoration-none" href="#reservations">Reservations</a></li>
+                            <li className="mb-1"><Link className="link-light text-decoration-none" to="/Menu">Menu</Link></li>
+                            <li className="mb-1"><Link className="link-light text-decoration-none" to="/Order">Order</Link></li>
+                            <li className="mb-1"><Link className="link-light text-decoration-none" to="/Reservations">Reservations</Link></li>
                         </ul>
                     </div>
                     <p>© Copyright 2024</p>

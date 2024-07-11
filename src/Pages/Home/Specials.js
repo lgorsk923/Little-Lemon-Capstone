@@ -1,6 +1,7 @@
-import { Button } from "../Button";
+import { Button } from "../../components/Button";
 import scooter from '../../images/scooter-svgrepo-com.svg';
 import bruschetta from '../../images/bruschetta.jpg';
+import { Link } from "react-router-dom";
 
 export function Specials() {
 
@@ -47,7 +48,9 @@ export function Specials() {
         <section className="specials">
             <div className='specials-header'>
                 <h2 className="header specials__title">Weekly Specials</h2>
-                <Button textVariant='Online Menu' />
+                <Link to='/Menu' >
+                    <Button textVariant='Online Menu' />
+                </Link>
             </div>
             <div className="specials__grid">
                 {specials.map((special, index) => {

@@ -3,7 +3,12 @@ li{
     font-size: 18px;
     font-weight: bold;
 }
+li:hover{
+    background-color: #D9D9D9;
+    border-radius: 16px;
+}
 .btn-outline-success{
     color: #495D57;
     border-color: #495D57;
 }
+

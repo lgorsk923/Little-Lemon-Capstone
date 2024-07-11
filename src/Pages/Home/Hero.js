@@ -1,4 +1,5 @@
-import { Button } from "../Button";
+import { Button } from "../../components/Button"
+import { Link } from 'react-router-dom';
 
 export function Hero() {
     return (
@@ -7,9 +8,12 @@ export function Hero() {
                 <h1 className="hero__title">Little Lemon</h1>
                 <h5 className="hero__subtitle">Chicago, IL</h5>
                 <p>We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist</p>
-                <Button textVariant='Reserve Table' />
+                <Link to='/Reservations' >
+                    <Button textVariant='Reserve Table' />
+                </Link>
+
             </div>
-            <img src="/src/images/bruschetta.jpg" />
-        </section>
+            <img src="../../images/bruschetta.jpg" alt="bruschetta" />
+        </section >
     );
 }
