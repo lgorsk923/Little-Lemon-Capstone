@@ -30,7 +30,7 @@ export function Nav() {
                                 <Link className="nav-link active" aria-current="page" to="/Order">Order</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/Login">Login/Sign Up</Link>
+                                <Link className="nav-link active" aria-current="page" to="/Login-Signup">Login/Sign Up</Link>
                             </li>
                         </ul>
                         <form className="d-flex">

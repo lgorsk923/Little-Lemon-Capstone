@@ -5,7 +5,7 @@ import { Footer } from './components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import { About } from './Pages/About';
 import { Menu } from './Pages/Menu';
-import { Booking } from './Pages/Booking';
+import { Booking } from './Pages/Booking/Booking';
 import { Order } from './Pages/Order';
 import { LoginSignup } from './Pages/Login-Signup';
 

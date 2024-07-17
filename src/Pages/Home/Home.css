@@ -10,39 +10,35 @@
     font-family: 'Karla-ExtraBold';
     src: url(/public/fonts/Karla/Karla-static/Karla-ExtraBold.ttf);
 }
-
-
-section{
-    margin:0px;
-    padding: 0px;
-}
 .header{
     font-size: 40px;
     font-family: 'Markazi Text', serif;
 }
 
-
 .hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     background-color: #495D57;
     color: white;
-    margin: 0px;
-    padding: 1% 10% 2% 10%;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    padding: 2rem 3rem;
+}
+.hero__container{
+    margin:1rem 3rem;
 }
 h1.hero__title{
     font-family: 'Markazi Text', serif;
     font-size: 64px;
     color: #F3CD17;
     font-weight: medium;
-    margin: 0px;
-    padding: 0px
+    margin: 0rem 1rem;
 }
 .hero__subtitle{
     font-family: 'Markazi Text', serif;
     font-size: 40px;
     color: white;
     font-weight: medium;
+    margin: 0rem 1rem;
 }
 .hero p{
     font-family: 'Karla', sans-serif;
@@ -50,9 +46,17 @@ h1.hero__title{
     font-weight: medium;
     color: white;
     width: 75%;
+    margin: .5rem 1rem;
 }
 
+.bruschetta{
+    width: 200px;
+    height: 300px;
+    margin: 0rem;
+    padding: 0px;
+    border-radius: 16px;
 
+}
 .specials {
     background-color: #F8F9FA;
     padding: 20px 100px;
@@ -126,7 +130,6 @@ h1.hero__title{
 }
 .home-about h1{
     color: #495D57;
-    
 }
 
 

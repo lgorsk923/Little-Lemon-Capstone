@@ -1,19 +1,19 @@
 import { Button } from "../../components/Button"
 import { Link } from 'react-router-dom';
 
-export function Hero() {
+export function Hero({ title, subtitle, text, image, alt, textVariant, path }) {
     return (
         <section className="hero">
             <div className="hero__container">
-                <h1 className="hero__title">Little Lemon</h1>
-                <h5 className="hero__subtitle">Chicago, IL</h5>
-                <p>We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist</p>
-                <Link to='/Reservations' >
-                    <Button textVariant='Reserve Table' />
+                <h1 className="hero__title">{title}</h1>
+                <h5 className="hero__subtitle">{subtitle}</h5>
+                <p>{text}</p>
+                <Link to={path} >
+                    <Button textVariant={textVariant} />
                 </Link>
 
             </div>
-            <img src="../../images/bruschetta.jpg" alt="bruschetta" />
+            <img className={alt} src={image} alt={alt} />
         </section >
     );
 }

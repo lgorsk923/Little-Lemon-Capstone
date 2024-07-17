@@ -1,0 +1,324 @@
+@font-face {
+    font-family: 'Karla';
+    src: url(/public/fonts/Karla/Karla-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: 'Karla-ExtraBold';
+    src: url(/public/fonts/Karla/Karla-static/Karla-ExtraBold.ttf);
+}
+@font-face {
+    font-family: 'Markazi Text';
+    src: url(/public/fonts/Markazi-Text/MarkaziText-VariableFont_wght.ttf);
+}
+
+.restaurant-image{
+    width: 75%;
+    height: 75%;
+    margin: 0rem;
+    padding: 0px;
+    border-radius: 16px;
+    border-radius: 16px;
+
+}
+*:focus{
+    outline: 3px solid  #F3CD17 !important;
+}
+
+.input-group-text{
+    cursor: pointer;
+    padding: 4px 4px;
+    text-align: center;
+    margin: auto;
+}
+
+.scheduleCheckTitle{
+    font-family: 'Markazi Text', serif;
+    font-size: 40px;
+    text-align: center;
+    margin: 1rem auto
+}
+
+.scheduleCheckInputs label{
+    font-size: 18px;
+    font-family: 'Karla', sans-serif;
+}
+
+.scheduleCheckInputs{
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    justify-items: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    border: black 3px solid;
+    border-radius: 50px;
+    margin: auto;
+}
+
+.scheduleCheckInputs>*:not(:last-child){
+    border-right:#D9D9D9 1px solid;
+}
+
+.schedule input[type="radio"]{
+    display: none;
+
+}
+.guests {
+    width: 70% ;
+    padding-top:0rem;
+    margin:auto;
+}
+.guests > label{
+    height:30px;
+}
+.guestInput{
+    border: none;
+    font-family: 'Karla-ExtraBold', sans-serif;
+    width: 90%;
+    height: 30px;
+    border-radius: 8px;
+}
+.guests input::placeholder{
+    color: #495D57;
+    font-size: 1rem;
+    font-family: 'Karla', sans-serif;
+}
+.date{
+    display: grid;
+    grid-row: 1;
+    grid-column: 2;
+    margin:auto;
+    width: 90%;
+}
+
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left:0rem;
+}
+
+.date > label {
+    height: 30px;
+}
+
+.input-group-append >.input-group-text{
+    width: 80%;
+}
+.date input{
+    border: none;
+    height: 30px;
+    font-family: 'Karla-ExtraBold', sans-serif;
+    margin-right: 1rem !important;
+}
+.date input::placeholder{
+    color: #495D57;
+    font-size: 1rem;
+    font-family: 'Karla', sans-serif;
+}
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    border-radius: 8px;
+}
+.react-datepicker__current-month{
+    color:#D9D9D9;
+}
+.react-datepicker__header{
+    background-color: #495D57;
+}
+.react-datepicker__day-name{
+    color: #D9D9D9
+}
+.react-datepicker__day{
+    color: #495D57;
+}
+.react-datepicker__day--selected{
+    background-color: #D9D9D9;
+}
+.react-datepicker__day--keyboard-selected{
+    background-color: #D9D9D9;
+}
+
+
+.time{
+    display: grid;
+    grid-row: 1;
+    grid-column: 3;
+    justify-items: start;
+    appearance: none;
+    align-items: center;
+    margin: auto;
+    width: 60%;
+    border-radius: 8px;
+}
+.time > label {
+    height: 30px;
+}
+.time > .btn-secondary{
+    height: 30px;
+    font-size: 1rem;
+}
+.time> .btn-secondary.show{
+    background-color: #F8F9FA;
+    color: #495D57;
+    padding: 0rem 1rem;
+}
+.btn .time:hover{
+    background-color: #D9D9D9;
+    color: #495D57;
+}
+.timeOptions > li {
+    color:#495D57;
+}
+
+.btn-secondary{
+    background:none;
+    color:#495D57;
+    border: none;
+    font-family: 'Karla', sans-serif;
+    font-size: 1rem;
+    padding:0rem;
+}
+.dropdown-menu{
+    background-color: #F8F9FA;
+    text-align: center;
+    height: 150px;
+    overflow: auto;
+    min-width: 7rem;
+}
+.dropdown .time{
+    font-weight: normal;
+    width: 200px;
+    padding: 20px;
+    height: 150px;
+}
+ .dropdown-toggle{
+    height:4rem;
+ }
+.dropdown .time:hover{
+    background-color: #D9D9D9;
+    font-weight: bold;
+}
+
+.dropdown .time:active{
+    background-color: #F8F9FA;
+    color: #495D57;
+}
+.bookingTitle{
+    background-color: #495D57;
+    display: grid;
+    color: #F8F9FA;
+    grid-template-columns:60% 40%;
+    margin: 3rem auto 0rem auto;
+    padding: 1rem 4rem 0rem 4rem;
+    width: 60%;
+    font-family: 'Markazi Text', serif;
+    align-items: center;
+    font-size: 40px;
+    text-align: start;
+    border: none
+}
+
+.silhouetteLogo{
+    display: grid;
+    grid-column: 2;
+    justify-self: end;
+    transform: rotate(-20deg);
+    height: 100px;
+    width: 100px;
+}
+
+.booking{
+    background-color: #495D57;
+    width: 60%;
+    margin: 0rem auto 3rem auto;
+    color: #F8F9FA;
+    font-family: "Karla", sans-serif;
+    border: none
+
+}
+
+.name{
+    justify-items: start;
+    margin: 0 1rem;
+    font-family: 'karla', sans-serif;
+    font-size: 20px;
+}
+
+.col > label{
+    margin-bottom: 1rem;
+}
+
+.name > .col{
+    margin: 0 3rem;
+}
+
+.col > input{
+background-color: #F8F9FA;
+}
+.phemail{
+    justify-items: start;
+    align-items: end;
+    margin: 1rem 1rem;
+    font-family: 'karla', sans-serif;
+    font-size: 20px;
+}
+
+.phemail > .col{
+    margin: 0 3rem;
+    padding-right: 0rem;
+}
+
+.email{
+    margin-right: 0rem !important;
+}
+
+.occasion{
+        justify-items: start;
+        align-items: center;
+        margin: 4rem 1rem 1rem 1rem;
+        font-family: 'karla', sans-serif;
+        font-size: 20px;
+}
+
+.occasion > .col{
+    margin: 0 3rem;
+}
+.row >.occasion {
+    font-family: 'Karla-ExtraBold', sans-serif;
+    text-align: center;
+}
+
+.occasion > option{
+    font-family: 'karla-ExtraBold', sans-serif;
+    text-align: center;
+}
+
+.otherInfo {
+    justify-items: start;
+    align-items: end;
+    margin: 2rem 4rem;
+    font-family: 'karla', sans-serif;
+    font-size: 20px;
+}
+
+.otherInfo > label{
+    margin: 1rem 0 1rem 0;
+}
+
+.complete-form{
+    display: flex;
+    justify-items: start;
+    align-items: end;
+    padding: 2rem 4rem 2rem 4rem;
+    font-family: 'karla', sans-serif;
+    font-size: 20px;
+}
+.form-check-input[type="checkbox"]{
+    border-radius: 50%;
+}
+
+.form-check-input:checked{
+    background-color: #495D57;
+    border: solid 2px #D9D9D9
+}
+.form-check{
+    width: 80%;
+}

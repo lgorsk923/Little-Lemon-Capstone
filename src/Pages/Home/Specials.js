@@ -1,6 +1,6 @@
 import { Button } from "../../components/Button";
 import scooter from '../../images/scooter-svgrepo-com.svg';
-import bruschetta from '../../images/bruschetta.jpg';
+import bruschetta from '../../images/bruschetta.png';
 import { Link } from "react-router-dom";
 
 export function Specials() {
