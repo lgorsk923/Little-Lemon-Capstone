@@ -1,5 +1,4 @@
 import { BookingForm } from "./BookingForm"
-import { ScheduleCheck } from "./ScheduleCheck"
 import restaurant from "../../images/restaurant-image.jpg"
 import './Booking.css';
 import { Hero } from "../Home/Hero";
@@ -15,7 +14,6 @@ export function Booking() {
                 textVariant='Catering Menu'
                 path='/Menu'
             />
-            <ScheduleCheck />
             <BookingForm />
         </>
     )

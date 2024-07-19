@@ -7,6 +7,10 @@
     src: url(/public/fonts/Karla/Karla-static/Karla-ExtraBold.ttf);
 }
 @font-face {
+    font-family: 'karla-Medium';
+    src: url(/public/fonts/Karla/Karla-static/Karla-Medium.ttf)
+}
+@font-face {
     font-family: 'Markazi Text';
     src: url(/public/fonts/Markazi-Text/MarkaziText-VariableFont_wght.ttf);
 }
@@ -26,11 +30,22 @@
 
 .input-group-text{
     cursor: pointer;
-    padding: 4px 4px;
+    padding: 5px;
     text-align: center;
     margin: auto;
+
+}
+span.input-group-text{
+    height: 80%;
 }
 
+form{
+    width: 60%;
+    margin:3rem auto 8rem auto;
+}
+fieldset .scheduleCheck{
+    background: none;
+}
 .scheduleCheckTitle{
     font-family: 'Markazi Text', serif;
     font-size: 40px;
@@ -44,7 +59,6 @@
 }
 
 .scheduleCheckInputs{
-    width: 60%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
@@ -72,14 +86,15 @@
 .guests > label{
     height:30px;
 }
-.guestInput{
+input.guestInput{
     border: none;
     font-family: 'Karla-ExtraBold', sans-serif;
+    color:#495D57;
     width: 90%;
     height: 30px;
     border-radius: 8px;
 }
-.guests input::placeholder{
+input.guestInput:placeholder{
     color: #495D57;
     font-size: 1rem;
     font-family: 'Karla', sans-serif;
@@ -112,7 +127,7 @@
 .date input::placeholder{
     color: #495D57;
     font-size: 1rem;
-    font-family: 'Karla', sans-serif;
+    font-family: 'Karla-ExtraBold', sans-serif;
 }
 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
     border-radius: 8px;
@@ -151,6 +166,14 @@
 .time > label {
     height: 30px;
 }
+.btn-secondary{
+    background:none;
+    color:#495D57;
+    border: none;
+    font-family: 'Karla-ExtraBold', sans-serif;
+    font-size: 1rem;
+    padding:0rem;
+}
 .time > .btn-secondary{
     height: 30px;
     font-size: 1rem;
@@ -160,38 +183,12 @@
     color: #495D57;
     padding: 0rem 1rem;
 }
-.btn .time:hover{
+.time> .btn-secondary:hover{
     background-color: #D9D9D9;
     color: #495D57;
-}
-.timeOptions > li {
-    color:#495D57;
+    font-family: 'Karla-ExtraBold', sans-serif;
 }
 
-.btn-secondary{
-    background:none;
-    color:#495D57;
-    border: none;
-    font-family: 'Karla', sans-serif;
-    font-size: 1rem;
-    padding:0rem;
-}
-.dropdown-menu{
-    background-color: #F8F9FA;
-    text-align: center;
-    height: 150px;
-    overflow: auto;
-    min-width: 7rem;
-}
-.dropdown .time{
-    font-weight: normal;
-    width: 200px;
-    padding: 20px;
-    height: 150px;
-}
- .dropdown-toggle{
-    height:4rem;
- }
 .dropdown .time:hover{
     background-color: #D9D9D9;
     font-weight: bold;
@@ -201,14 +198,15 @@
     background-color: #F8F9FA;
     color: #495D57;
 }
+
 .bookingTitle{
-    background-color: #495D57;
     display: grid;
+    background-color: #495D57;
     color: #F8F9FA;
     grid-template-columns:60% 40%;
+    grid-template-rows: auto;
     margin: 3rem auto 0rem auto;
     padding: 1rem 4rem 0rem 4rem;
-    width: 60%;
     font-family: 'Markazi Text', serif;
     align-items: center;
     font-size: 40px;
@@ -225,23 +223,30 @@
     width: 100px;
 }
 
-.booking{
+.contactInfo{
     background-color: #495D57;
-    width: 60%;
-    margin: 0rem auto 3rem auto;
+    margin: 0rem auto 0 auto;
+    padding: 0rem .1rem;
     color: #F8F9FA;
     font-family: "Karla", sans-serif;
-    border: none
-
+    border: none;
 }
 
 .name{
     justify-items: start;
-    margin: 0 1rem;
+    margin: 0 0 0 1rem;
+    padding-top: 1rem;
     font-family: 'karla', sans-serif;
     font-size: 20px;
 }
 
+div.fname{
+    width: 60%;
+}
+
+div.lname{
+    width: 40%;
+}
 .col > label{
     margin-bottom: 1rem;
 }
@@ -254,28 +259,23 @@
 background-color: #F8F9FA;
 }
 .phemail{
-    justify-items: start;
     align-items: end;
-    margin: 1rem 1rem;
     font-family: 'karla', sans-serif;
     font-size: 20px;
+    margin: 2rem 0 0 1rem;
+    padding-right: 0rem;
 }
 
 .phemail > .col{
     margin: 0 3rem;
-    padding-right: 0rem;
-}
-
-.email{
-    margin-right: 0rem !important;
 }
 
 .occasion{
-        justify-items: start;
-        align-items: center;
-        margin: 4rem 1rem 1rem 1rem;
-        font-family: 'karla', sans-serif;
-        font-size: 20px;
+    justify-items: start;
+    align-items: center;
+    margin: 4rem 0rem 0rem 1rem;
+    font-family: 'karla', sans-serif;
+    font-size: 20px;
 }
 
 .occasion > .col{
@@ -286,15 +286,13 @@ background-color: #F8F9FA;
     text-align: center;
 }
 
-.occasion > option{
-    font-family: 'karla-ExtraBold', sans-serif;
-    text-align: center;
+div.otherInfo{
+    padding-bottom: .5rem;
+    margin: 2rem 4rem 0rem 4rem;
 }
-
 .otherInfo {
     justify-items: start;
     align-items: end;
-    margin: 2rem 4rem;
     font-family: 'karla', sans-serif;
     font-size: 20px;
 }
@@ -302,14 +300,23 @@ background-color: #F8F9FA;
 .otherInfo > label{
     margin: 1rem 0 1rem 0;
 }
-
-.complete-form{
+textarea{
+    margin-bottom:2rem;
+}
+.completeForm{
     display: flex;
-    justify-items: start;
-    align-items: end;
-    padding: 2rem 4rem 2rem 4rem;
+    background-color: #495D57;
+    color: #F8F9FA;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 4rem 2rem 4rem;
     font-family: 'karla', sans-serif;
     font-size: 20px;
+}
+.confirm{
+    margin: 0 0 0 1rem;
+    padding: 0 0 0 1rem;
+
 }
 .form-check-input[type="checkbox"]{
     border-radius: 50%;
@@ -319,6 +326,7 @@ background-color: #F8F9FA;
     background-color: #495D57;
     border: solid 2px #D9D9D9
 }
-.form-check{
-    width: 80%;
+.bookButton{
+    display: flex;
+    justify-content: flex-end;
 }

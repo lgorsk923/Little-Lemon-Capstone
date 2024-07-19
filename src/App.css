@@ -28,6 +28,11 @@
   src: url(/public/fonts/Markazi-Text/static/MarkaziText-Medium.ttf);
 }
 
+@font-face{
+  font-family: 'Karla-Medium';
+  src: url(/public/fonts/Karla/Karla-static/Karla-Medium.ttf);
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -87,9 +92,8 @@ h1.hero__title{
   margin: 0rem 1rem;
 }
 .hero p{
-  font-family: 'Karla', sans-serif;
+  font-family: 'Karla-Medium', sans-serif;
   font-size: 18px;
-  font-weight: medium;
   color: white;
   width: 75%;
   margin: .5rem 1rem;
@@ -97,9 +101,8 @@ h1.hero__title{
 
 .btn-warning{
   background-color: #F3CD17;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Karla-Medium', sans-serif;
   font-size: 18px;
-  font-weight: medium;
   border-radius: 16px;
   margin: 1rem 1rem;
   box-shadow: 2px 2px 2px #D9D9D9;
