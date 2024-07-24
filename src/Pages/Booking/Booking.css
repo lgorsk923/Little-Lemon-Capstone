@@ -150,7 +150,10 @@ input.guestInput:placeholder{
 .react-datepicker__day--keyboard-selected{
     background-color: #D9D9D9;
 }
-
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    border-radius: 8px;
+    color: #495D57;
+}
 
 .time{
     display: grid;
@@ -283,6 +286,7 @@ background-color: #F8F9FA;
 }
 .row >.occasion {
     font-family: 'Karla-ExtraBold', sans-serif;
+    color:#495D57;
     text-align: center;
 }
 
