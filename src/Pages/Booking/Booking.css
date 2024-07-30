@@ -191,7 +191,14 @@ input.guestInput:placeholder{
     color: #495D57;
     font-family: 'Karla-ExtraBold', sans-serif;
 }
-
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled), button:not(:disabled){
+    cursor: pointer;
+    color:#495D57;
+    font-family: 'Karla-ExtraBold', sans-serif;
+    background-color: #F8F9FA;
+}
 .dropdown .time:hover{
     background-color: #D9D9D9;
     font-weight: bold;
@@ -243,11 +250,11 @@ input.guestInput:placeholder{
     font-size: 20px;
 }
 
-div.fname{
+div.firstName{
     width: 60%;
 }
 
-div.lname{
+div.lastName{
     width: 40%;
 }
 .col > label{

@@ -78,13 +78,13 @@ export function BookingForm({ formState, dispatch }) {
                         </div>
                         <div className='contactInfo'>
                             <div className="row name">
-                                <div className="col fname">
-                                    <label htmlFor="fname">First Name</label>
-                                    <input id='fname' name='firstName' type="text" className="form-control nameinput" value={formState.fields.firstName} onChange={updateField} />
+                                <div className="col firstName">
+                                    <label htmlFor="firstName">First Name</label>
+                                    <input id='firstName' name='firstName' type="text" className="form-control nameinput" value={formState.fields.firstName} onChange={updateField} />
                                 </div>
-                                <div className="col lname">
-                                    <label htmlFor="lname">Last Name</label>
-                                    <input id='lname' name='lastName' type="text" className="form-control nameinput" value={formState.fields.lastName} onChange={updateField} />
+                                <div className="col lastName">
+                                    <label htmlFor="lastName">Last Name</label>
+                                    <input id='lastName' name='lastName' type="text" className="form-control nameinput" value={formState.fields.lastName} onChange={updateField} />
                                 </div>
                             </div>
                             <div className="row phemail">

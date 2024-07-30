@@ -1,8 +1,8 @@
 import React from "react";
 
-export function Button({ textVariant }) {
+export function Button({ type, textVariant }) {
     return (
-        <button className="btn btn-warning">{textVariant}</button>
+        <button type={type} className="btn btn-warning">{textVariant}</button>
 
     )
 }

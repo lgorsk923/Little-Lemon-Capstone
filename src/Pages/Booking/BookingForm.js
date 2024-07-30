@@ -1,10 +1,10 @@
 import { Button } from '../../components/Button'
 import silhouetteLogo from '../../images/silouhette_logo-removebg-preview.png'
 import React, { useState } from 'react';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { DateComponent } from '../../components/Date';
 
 export function BookingForm() {
 
@@ -44,7 +44,7 @@ export function BookingForm() {
     }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <fieldset className='scheduleCheck'>
                 <h1 className="scheduleCheckTitle">Tell us about your Party!</h1>
                 <div id='scheduleChecker' className='scheduleCheckInputs'>
@@ -54,7 +54,7 @@ export function BookingForm() {
                     </div>
                     <div className="date">
                         <label>Date</label>
-                        <DatePicker selected={date} onChange={date => setDate(date)} customInput={<CustomInput />} />
+                        <DateComponent selected={date} onChange={date => setDate(date)} customInput={<CustomInput />} />
                     </div>
                     <div className="dropdown time">
                         <label>Time</label>
