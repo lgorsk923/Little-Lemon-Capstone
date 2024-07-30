@@ -1,65 +1,100 @@
 import { Button } from '../../components/Button'
 import silhouetteLogo from '../../images/silouhette_logo-removebg-preview.png'
-import React, { useState } from 'react';
-import "react-datepicker/dist/react-datepicker.css";
-import { FaCalendarAlt } from "react-icons/fa";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { React } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { DateComponent } from '../../components/Date';
 
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export function BookingForm() {
+    const formik = useFormik({
+        initialValues: {
+            guests: 1,
+            date: new Date().toLocaleDateString(),
+            time: 'Select Time',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            occasion: 'Occasion',
+            otherInfo: '',
+            confirmButton: false
+        },
+        validationSchema: Yup.object().shape({
+            guests:
+                Yup.number()
+                    .positive('Must be a positive number')
+                    .min(1, 'There must be at least one guest')
+                    .max(25, 'Our maximum party size is 25, for larger groups, please contact us directly to book a private event')
+                    .required('Required'),
+            date: Yup.date().required('Required'),
+            time: Yup.string().required('Required'),
+            firstName: Yup.string().required('Required'),
+            lastName: Yup.string().required('Required'),
+            email: Yup.string().email('Please enter a valid email address').required('Required'),
+            phone: Yup.string()
+                .required('Required')
+                .matches(/^[0-9]{10}$/, 'Please enter a valid phone number')
+                .min(10, 'Please enter a valid phone number')
+        }),
+        onSubmit: (values) => {
+            console.log(values);
+            return (
+                alert(JSON.stringify(values, null, 2))
+            )
+        }
+    });
 
-    const [guestCount, setGuestCount] = useState(1);
-    const [date, setDate] = useState(null);
-    const [time, setTime] = useState('Select Time');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [number, setNumber] = useState('');
-    const [occasion, setOccasion] = useState('Occasion');
-    const [otherInfo, setOtherInfo] = useState('');
-    let timeOptions = ['Select Time', '11:00AM', '11:30AM', '12:00PM', '1:00PM', '1:30PM', '2:00PM', '2:30PM', '3:00PM', '3:30PM', '4:00PM', '4:30PM', '5:00PM', '5:30PM', '6:00PM', '6:30PM', '7:00PM', '7:30PM', '8:00PM', '8:30PM']
+    const availability = [
+        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '7:30 PM', '8:00 PM'],
+        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM'],
+        ['11:00 AM', '11:30 AM', '12:00 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '5:00 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM']
+    ];
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('form submitted')
-        setFirstName('');
-        setLastName('');
-        setEmail();
-        setNumber('');
-        setOccasion('Occasion');
-        setOtherInfo('');
-    }
-
-    function CustomInput({ value, onClick }) {
-        return (
-            <div className="input-group">
-                <div className='input-group-append'>
-                    <span className='input-group-text'>
-                        <FaCalendarAlt />
-                    </span>
-                </div>
-                <input placeholder='MM/DD/YYYY' type='text' className='form-control' value={value} onClick={onClick} readOnly />
-            </div>
-        )
-    }
+    const dayOfWeek = new Date(formik.values.date).getDay();
+    const availabilityForDay = availability[dayOfWeek];
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
             <fieldset className='scheduleCheck'>
                 <h1 className="scheduleCheckTitle">Tell us about your Party!</h1>
                 <div id='scheduleChecker' className='scheduleCheckInputs'>
                     <div className='guests'>
-                        <label> Guests </label>
-                        <input className="guestInput" placeholder="1" value={guestCount} onChange={e => setGuestCount(e.target.value)} />
+                        <label htmlFor='guests'> Guests </label>
+                        <input
+                            id='guests'
+                            name='guests'
+                            type='number'
+                            placeholder='1'
+                            className="guestInput"
+                            onChange={formik.handleChange}
+                            value={formik.values.guests}
+                        />
                     </div>
                     <div className="date">
-                        <label>Date</label>
-                        <DateComponent selected={date} onChange={date => setDate(date)} customInput={<CustomInput />} />
+                        <DateComponent
+                            date={formik.values.date}
+                            setField={(field, value) => formik.setFieldValue(field, value)} />
                     </div>
                     <div className="dropdown time">
-                        <label>Time</label>
-                        <select className="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false" value={time} onChange={e => setTime(e.target.value)}>
-                            {timeOptions.map((time, index) => <option className="dropdown-item" key={index}>{time}</option>)}
+                        <label htmlFor='time'>Time</label>
+                        <select
+                            id='time'
+                            name='time'
+                            type="button"
+                            className="btn btn-secondary dropdown-toggle"
+                            aria-expanded="false"
+                            value={formik.values.time}
+                            onChange={formik.handleChange}
+                        >
+                            <option>Select Time</option>
+                            {availabilityForDay.map((time, index) => <option className="dropdown-item" key={index}>{time}</option>)}
                         </select>
                     </div>
                 </div >
@@ -72,31 +107,66 @@ export function BookingForm() {
                     </div>
                     <div className='contactInfo'>
                         <div className="row name">
-                            <div className="col fname">
-                                <label htmlFor="fname">First Name</label>
-                                <input id='fname' type="text" className="form-control nameinput" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                            <div className="col firstName">
+                                <label htmlFor="firstName">First Name</label>
+                                <input
+                                    id='firstName'
+                                    name='time'
+                                    type="text"
+                                    className="form-control nameinput"
+                                    value={formik.values.firstName}
+                                    onChange={formik.handleChange}
+                                />
                             </div>
-                            <div className="col lname">
-                                <label htmlFor="lname">Last Name</label>
-                                <input id='lname' type="text" className="form-control nameinput" value={lastName} onChange={e => setLastName(e.target.value)} />
+                            <div className="col lastName">
+                                <label htmlFor="lastName">Last Name</label>
+                                <input
+                                    id='lastName'
+                                    name='lastName'
+                                    type="text"
+                                    className="form-control nameinput"
+                                    value={formik.values.lastName}
+                                    onChange={formik.handleChange}
+                                />
                             </div>
                         </div>
                         <div className="row phemail">
                             <div className="col email">
                                 <label htmlFor="email" >Email Address</label>
-                                <input id='email' type="email" className="form-control email" value={email} onChange={e => setEmail(e.target.value)} />
+                                <input
+                                    id='email'
+                                    name='email'
+                                    type="email"
+                                    className="form-control email"
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                />
                             </div>
                             <div className="col number">
                                 <label htmlFor="phone" className='phone'>
                                     Phone Number
                                     <h6>(for text updates)</h6>
                                 </label>
-                                <input id='phone' type="text" className="form-control number" value={number} onChange={e => setNumber(e.target.value)} />
+                                <input
+                                    id='phone'
+                                    name='phone'
+                                    type="text"
+                                    className="form-control number"
+                                    value={formik.values.phone}
+                                    onChange={formik.onChange}
+                                />
                             </div>
                         </div>
                         <div className="row occasion">
                             <label className='col' htmlFor="occasion">Celebrating something special? Tell us about it!</label>
-                            <select id="occasion" className=" col form-control occasion" value={occasion} onChange={e => setOccasion(e.target.value)}>
+                            <select
+                                id="occasion"
+                                name='occasion'
+                                type='button'
+                                className=" col form-control occasion"
+                                value={formik.values.occasion}
+                                onChange={formik.handleChange}
+                            >
                                 <option>Occasion</option>
                                 <option>Birthday</option>
                                 <option>Engagement</option>
@@ -106,20 +176,26 @@ export function BookingForm() {
                         </div>
                         <div className="form-group otherInfo">
                             <label htmlFor="otherInfo">Is there anything else you would like us to know?</label>
-                            <textarea className="form-control" id="otherInfo" rows="3" value={otherInfo} onChange={e => setOtherInfo(e.target.value)}></textarea>
+                            <textarea
+                                id="otherInfo"
+                                name='otherInfo'
+                                className="form-control"
+                                rows="3"
+                                value={formik.values.otherInfo}
+                                onChange={formik.handleChange}></textarea>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset className="align-items-center completeForm">
                     <div className='row'>
                         <div className="col form-check mb-2 confirm">
-                            <input className="form-check-input" type="checkbox" id="autoSizingCheck" />
-                            <label className="form-check-label" htmlFor="autoSizingCheck">
+                            <input className="form-check-input" type="checkbox" id="confirmButton" />
+                            <label className="form-check-label" htmlFor="confirmButton">
                                 Check here to confirm the above information is accurate
                             </label>
                         </div>
                         <div className="col bookButton">
-                            <Button type='submit' textVariant=' Book My Table' disable={!firstName} />
+                            <Button type='submit' textVariant=' Book My Table' />
                         </div>
                     </div>
                 </fieldset>
