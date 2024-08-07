@@ -41,9 +41,7 @@ export function BookingForm() {
         }),
         onSubmit: (values) => {
             console.log(values);
-            return (
-                alert(JSON.stringify(values, null, 2))
-            )
+            alert(JSON.stringify('Your booking has been submitted! Please check your inbox for a confirmation email.'));
         }
     });
 
@@ -61,7 +59,7 @@ export function BookingForm() {
     const availabilityForDay = availability[dayOfWeek];
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e) }}>
             <fieldset className='scheduleCheck'>
                 <h1 className="scheduleCheckTitle">Tell us about your Party!</h1>
                 <div id='scheduleChecker' className='scheduleCheckInputs'>
@@ -73,14 +71,18 @@ export function BookingForm() {
                             type='number'
                             placeholder='1'
                             className="guestInput"
-                            onChange={formik.handleChange}
                             value={formik.values.guests}
+                            onChange={formik.handleChange}
+                            {...formik.getFieldProps('guests')}
                         />
+                        {formik.touched.guests && formik.errors.guests ? <div className='error'>{formik.errors.guests}</div> : null}
                     </div>
                     <div className="date">
+                        <label htmlFor='date'>Date</label>
                         <DateComponent
-                            date={formik.values.date}
-                            setField={(field, value) => formik.setFieldValue(field, value)} />
+                            selected={formik.values.date}
+                            onChange={(d) => formik.setFieldValue('date', d)} />
+                        {formik.touched.date && formik.errors.date ? <div className='error'>{formik.errors.date}</div> : null}
                     </div>
                     <div className="dropdown time">
                         <label htmlFor='time'>Time</label>
@@ -96,6 +98,7 @@ export function BookingForm() {
                             <option>Select Time</option>
                             {availabilityForDay.map((time, index) => <option className="dropdown-item" key={index}>{time}</option>)}
                         </select>
+                        {formik.touched.time && formik.errors.time ? <div className='error'>{formik.errors.time}</div> : null}
                     </div>
                 </div >
             </fieldset>
@@ -117,6 +120,7 @@ export function BookingForm() {
                                     value={formik.values.firstName}
                                     onChange={formik.handleChange}
                                 />
+                                {formik.touched.firstName && formik.errors.firstName ? <div className='error'>{formik.errors.firstName}</div> : null}
                             </div>
                             <div className="col lastName">
                                 <label htmlFor="lastName">Last Name</label>
@@ -128,6 +132,7 @@ export function BookingForm() {
                                     value={formik.values.lastName}
                                     onChange={formik.handleChange}
                                 />
+                                {formik.touched.lastName && formik.errors.lastName ? <div className='error'>{formik.errors.lastName}</div> : null}
                             </div>
                         </div>
                         <div className="row phemail">
@@ -141,6 +146,7 @@ export function BookingForm() {
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
                                 />
+                                {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
                             </div>
                             <div className="col number">
                                 <label htmlFor="phone" className='phone'>
@@ -153,8 +159,9 @@ export function BookingForm() {
                                     type="text"
                                     className="form-control number"
                                     value={formik.values.phone}
-                                    onChange={formik.onChange}
+                                    onChange={formik.handleChange}
                                 />
+                                {formik.touched.phone && formik.errors.phone ? <div className='error'>{formik.errors.phone}</div> : null}
                             </div>
                         </div>
                         <div className="row occasion">

@@ -1,8 +1,7 @@
-import React from "react";
 import DatePicker from "react-datepicker";
 import { FaCalendarAlt } from "react-icons/fa";
-import { forwardRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import { forwardRef } from "react";
 
 export function DateComponent({ selected, onChange }) {
 
@@ -24,7 +23,8 @@ export function DateComponent({ selected, onChange }) {
                     ref={ref}
                     readOnly />
             </div>
-        ));
+        )
+    );
 
     return (
         <DatePicker
@@ -33,8 +33,7 @@ export function DateComponent({ selected, onChange }) {
             name="date"
             selected={(selected && new Date(selected)) || null}
             onChange={onChange}
-            customInput={
-                <CustomInput />}
+            customInput={<CustomInput />}
         />
     )
 }
