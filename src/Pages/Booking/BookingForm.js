@@ -20,7 +20,7 @@ export function BookingForm() {
             phone: '',
             occasion: 'Occasion',
             otherInfo: '',
-            confirmButton: false
+            confirmButton: false,
         },
         validationSchema: Yup.object().shape({
             guests:
@@ -31,18 +31,19 @@ export function BookingForm() {
                     .required('Required'),
             date: Yup.date().required('Required'),
             time: Yup.string().required('Required'),
-            firstName: Yup.string().required('Required'),
-            lastName: Yup.string().required('Required'),
-            email: Yup.string().email('Please enter a valid email address').required('Required'),
+            firstName: Yup.string().required('Required').trim(),
+            lastName: Yup.string().required('Required').trim(),
+            email: Yup.string().email('Please enter a valid email address').required('Required').trim(),
             phone: Yup.string()
                 .required('Required')
                 .matches(/^[0-9]{10}$/, 'Please enter a valid phone number')
-                .min(10, 'Please enter a valid phone number')
+                .min(10, 'Please enter a valid phone number'),
+            confirmButton: Yup.boolean().oneOf([true], 'You must confirm the information above is accurate to submit your booking'),
         }),
-        onSubmit: (values) => {
+        onSubmit: values => {
             console.log(values);
-            alert(JSON.stringify('Your booking has been submitted! Please check your inbox for a confirmation email.'));
-        }
+            alert('Your booking has been submitted! Please check your inbox for a confirmation email.');
+        },
     });
 
     const availability = [
@@ -73,15 +74,17 @@ export function BookingForm() {
                             className="guestInput"
                             value={formik.values.guests}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             {...formik.getFieldProps('guests')}
+                            required
                         />
-                        {formik.touched.guests && formik.errors.guests ? <div className='error'>{formik.errors.guests}</div> : null}
                     </div>
                     <div className="date">
                         <label htmlFor='date'>Date</label>
                         <DateComponent
                             selected={formik.values.date}
-                            onChange={(d) => formik.setFieldValue('date', d)} />
+                            onChange={(d) => formik.setFieldValue('date', d)}
+                            required />
                         {formik.touched.date && formik.errors.date ? <div className='error'>{formik.errors.date}</div> : null}
                     </div>
                     <div className="dropdown time">
@@ -94,6 +97,7 @@ export function BookingForm() {
                             aria-expanded="false"
                             value={formik.values.time}
                             onChange={formik.handleChange}
+                            required
                         >
                             <option>Select Time</option>
                             {availabilityForDay.map((time, index) => <option className="dropdown-item" key={index}>{time}</option>)}
@@ -101,6 +105,7 @@ export function BookingForm() {
                         {formik.touched.time && formik.errors.time ? <div className='error'>{formik.errors.time}</div> : null}
                     </div>
                 </div >
+                {formik.touched.guests && formik.errors.guests ? <div className='error'>{formik.errors.guests}</div> : null}
             </fieldset>
             <div className='infoInput'>
                 <fieldset className='infoInput'>
@@ -114,13 +119,16 @@ export function BookingForm() {
                                 <label htmlFor="firstName">First Name</label>
                                 <input
                                     id='firstName'
-                                    name='time'
+                                    name='firstName'
                                     type="text"
-                                    className="form-control nameinput"
+                                    className={formik.touched.firstName && formik.errors.firstName ? "form-control error" : "form-control name-input"}
                                     value={formik.values.firstName}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    placeholder=' '
+                                    required
                                 />
-                                {formik.touched.firstName && formik.errors.firstName ? <div className='error'>{formik.errors.firstName}</div> : null}
+                                {formik.touched.firstName && formik.errors.firstName ? <div className='error-message'>{formik.errors.firstName}</div> : null}
                             </div>
                             <div className="col lastName">
                                 <label htmlFor="lastName">Last Name</label>
@@ -128,11 +136,13 @@ export function BookingForm() {
                                     id='lastName'
                                     name='lastName'
                                     type="text"
-                                    className="form-control nameinput"
+                                    className={formik.touched.lastName && formik.errors.lastName ? "form-control error" : "form-control name-input"}
                                     value={formik.values.lastName}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    required
                                 />
-                                {formik.touched.lastName && formik.errors.lastName ? <div className='error'>{formik.errors.lastName}</div> : null}
+                                {formik.touched.lastName && formik.errors.lastName ? <div className='error-message'>{formik.errors.lastName}</div> : null}
                             </div>
                         </div>
                         <div className="row phemail">
@@ -142,11 +152,13 @@ export function BookingForm() {
                                     id='email'
                                     name='email'
                                     type="email"
-                                    className="form-control email"
+                                    className={formik.touched.email && formik.errors.email ? "form-control error" : "form-control email"}
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    required
                                 />
-                                {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
+                                {formik.touched.email && formik.errors.email ? <div className='error-message'>{formik.errors.email}</div> : null}
                             </div>
                             <div className="col number">
                                 <label htmlFor="phone" className='phone'>
@@ -157,11 +169,13 @@ export function BookingForm() {
                                     id='phone'
                                     name='phone'
                                     type="text"
-                                    className="form-control number"
+                                    className={formik.touched.phone && formik.errors.phone ? "form-control error" : "form-control number"}
                                     value={formik.values.phone}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    required
                                 />
-                                {formik.touched.phone && formik.errors.phone ? <div className='error'>{formik.errors.phone}</div> : null}
+                                {formik.touched.phone && formik.errors.phone ? <div className='error-message'>{formik.errors.phone}</div> : null}
                             </div>
                         </div>
                         <div className="row occasion">
@@ -196,10 +210,16 @@ export function BookingForm() {
                 <fieldset className="align-items-center completeForm">
                     <div className='row'>
                         <div className="col form-check mb-2 confirm">
-                            <input className="form-check-input" type="checkbox" id="confirmButton" />
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="confirmButton"
+                                onChange={formik.handleChange}
+                                checked={formik.values.confirmButton} />
                             <label className="form-check-label" htmlFor="confirmButton">
                                 Check here to confirm the above information is accurate
                             </label>
+                            {formik.touched.confirmButton && formik.errors.confirmButton ? <div className='error-message'>{formik.errors.confirmButton}</div> : null}
                         </div>
                         <div className="col bookButton">
                             <Button type='submit' textVariant=' Book My Table' />
