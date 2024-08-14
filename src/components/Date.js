@@ -3,10 +3,10 @@ import { FaCalendarAlt } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css";
 import { forwardRef } from "react";
 
-export function DateComponent({ selected, onChange }) {
+export function DateComponent({ selected, onChange, onChangeRaw, className }) {
 
     const CustomInput = forwardRef(
-        ({ value, onClick }, ref) => (
+        ({ value, onClick, className }, ref) => (
             <div className="input-group">
                 <div className='input-group-append'>
                     <span className='input-group-text'>
@@ -17,7 +17,7 @@ export function DateComponent({ selected, onChange }) {
                     id='selectDate'
                     placeholder='MM/DD/YYYY'
                     type='text'
-                    className='form-control'
+                    className={className}
                     onClick={onClick}
                     value={value}
                     ref={ref}
@@ -33,7 +33,8 @@ export function DateComponent({ selected, onChange }) {
             name="date"
             selected={(selected && new Date(selected)) || null}
             onChange={onChange}
-            customInput={<CustomInput />}
+            onChangeRaw={onChangeRaw}
+            customInput={<CustomInput className={className} />}
         />
     )
 }

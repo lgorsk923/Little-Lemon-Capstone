@@ -9,9 +9,10 @@ import { DateComponent } from '../../components/Date';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function BookingForm() {
+
     const formik = useFormik({
         initialValues: {
-            guests: 1,
+            guests: '',
             date: new Date().toLocaleDateString(),
             time: 'Select Time',
             firstName: '',
@@ -28,9 +29,17 @@ export function BookingForm() {
                     .positive('Must be a positive number')
                     .min(1, 'There must be at least one guest')
                     .max(25, 'Our maximum party size is 25, for larger groups, please contact us directly to book a private event')
-                    .required('Required'),
-            date: Yup.date().required('Required'),
-            time: Yup.string().required('Required'),
+                    .required('Please enter the number of guests.'),
+            date: Yup.date()
+                .test(
+                    'date',
+                    'The date you selected has already passed.',
+                    function (date) { return new Date(date) >= new Date(); }
+                )
+                .required('Required'),
+            time: Yup.string()
+                .notOneOf(['Select Time'], 'Please select one of our available time slots.')
+                .required('Please select one of our available time slots.'),
             firstName: Yup.string().required('Required').trim(),
             lastName: Yup.string().required('Required').trim(),
             email: Yup.string().email('Please enter a valid email address').required('Required').trim(),
@@ -40,10 +49,16 @@ export function BookingForm() {
                 .min(10, 'Please enter a valid phone number'),
             confirmButton: Yup.boolean().oneOf([true], 'You must confirm the information above is accurate to submit your booking'),
         }),
-        onSubmit: values => {
-            console.log(values);
-            alert('Your booking has been submitted! Please check your inbox for a confirmation email.');
-        },
+        onSubmit:
+            (values, { resetForm }) => {
+                if (formik.isValid) {
+                    console.log('Form submitted:', values);
+                    alert('Your reservation has been submitted! We will send you a confirmation email shortly.');
+                    resetForm();
+                } else {
+                    alert('Please fill out all required fields before submitting your reservation.');
+                }
+            }
     });
 
     const availability = [
@@ -55,6 +70,10 @@ export function BookingForm() {
         ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '5:00 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
         ['4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM']
     ];
+
+    const onClick = () => {
+        !formik.isValid ? alert('Please fill out all required fields before submitting your reservation.') : formik.handleSubmit();
+    };
 
     const dayOfWeek = new Date(formik.values.date).getDay();
     const availabilityForDay = availability[dayOfWeek];
@@ -71,11 +90,10 @@ export function BookingForm() {
                             name='guests'
                             type='number'
                             placeholder='1'
-                            className="guestInput"
+                            className={formik.touched.guests && formik.errors.guests ? "form-control error guestInput" : "form-control guestInput"}
                             value={formik.values.guests}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            {...formik.getFieldProps('guests')}
                             required
                         />
                     </div>
@@ -83,9 +101,12 @@ export function BookingForm() {
                         <label htmlFor='date'>Date</label>
                         <DateComponent
                             selected={formik.values.date}
+                            className={formik.touched.date && formik.errors.date ? "form-control error date" : "form-control"}
                             onChange={(d) => formik.setFieldValue('date', d)}
-                            required />
-                        {formik.touched.date && formik.errors.date ? <div className='error'>{formik.errors.date}</div> : null}
+                            onChangeRaw={(e) => formik.setFieldTouched('date', e.target.value)}
+                            onBlur={formik.handleBlur}
+                            required
+                        />
                     </div>
                     <div className="dropdown time">
                         <label htmlFor='time'>Time</label>
@@ -93,19 +114,23 @@ export function BookingForm() {
                             id='time'
                             name='time'
                             type="button"
-                            className="btn btn-secondary dropdown-toggle"
+                            className={formik.touched.time && formik.errors.time ? 'btn btn-secondary dropdown-toggle error' : "btn btn-secondary dropdown-toggle"}
                             aria-expanded="false"
                             value={formik.values.time}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             required
                         >
-                            <option>Select Time</option>
-                            {availabilityForDay.map((time, index) => <option className="dropdown-item" key={index}>{time}</option>)}
+                            <option value=''>Select Time</option>
+                            {availabilityForDay.map((time, index) => <option className="dropdown-item" value={time} key={index}>{time}</option>)}
                         </select>
-                        {formik.touched.time && formik.errors.time ? <div className='error'>{formik.errors.time}</div> : null}
                     </div>
                 </div >
-                {formik.touched.guests && formik.errors.guests ? <div className='error'>{formik.errors.guests}</div> : null}
+                <div>
+                    {formik.touched.guests && formik.errors.guests ? <div className='schedule-check-error'>{formik.errors.guests}</div> : null}
+                    {formik.touched.date && formik.errors.date ? <div className='schedule-check-error'>{formik.errors.date}</div> : null}
+                    {formik.touched.time && formik.errors.time ? <div className='schedule-check-error'>{formik.errors.time}</div> : null}
+                </div>
             </fieldset>
             <div className='infoInput'>
                 <fieldset className='infoInput'>
@@ -211,18 +236,20 @@ export function BookingForm() {
                     <div className='row'>
                         <div className="col form-check mb-2 confirm">
                             <input
-                                className="form-check-input"
+                                className={formik.touched.confirmButton && formik.errors.confirmButton ? 'error form-check-input' : 'form-check-input'}
                                 type="checkbox"
                                 id="confirmButton"
                                 onChange={formik.handleChange}
-                                checked={formik.values.confirmButton} />
+                                checked={formik.values.confirmButton}
+                                onBlur={formik.handleBlur}
+                                required />
                             <label className="form-check-label" htmlFor="confirmButton">
                                 Check here to confirm the above information is accurate
                             </label>
                             {formik.touched.confirmButton && formik.errors.confirmButton ? <div className='error-message'>{formik.errors.confirmButton}</div> : null}
                         </div>
                         <div className="col bookButton">
-                            <Button type='submit' textVariant=' Book My Table' />
+                            <Button type='submit' onClick={onClick} textVariant=' Book My Table' />
                         </div>
                     </div>
                 </fieldset>

@@ -32,6 +32,10 @@
   font-family: 'Karla-Medium';
   src: url(/public/fonts/Karla/Karla-static/Karla-Medium.ttf);
 }
+@font-face{
+  font-family: 'Karla-Bold';
+  src: url(/public/fonts/Karla/Karla-static/Karla-Bold.ttf);
+}
 
 .App-header {
   background-color: #282c34;
@@ -101,7 +105,7 @@ h1.hero__title{
 
 .btn-warning{
   background-color: #F3CD17;
-  font-family: 'Karla-Medium', sans-serif;
+  font-family: 'Karla-Medium', sans-serif !important;
   font-size: 18px;
   border-radius: 16px;
   margin: 1rem 1rem;
@@ -110,6 +114,7 @@ h1.hero__title{
 
 .btn-warning:hover{
   background-color: #F8F9FA;
+  font-family: 'Karla-Bold', sans-serif !important;
   color: #495D57;
   border: #495D57 5px;
 }
