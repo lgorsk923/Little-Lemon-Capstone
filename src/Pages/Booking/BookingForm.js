@@ -9,7 +9,6 @@ import { DateComponent } from '../../components/Date';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function BookingForm() {
-
     const formik = useFormik({
         initialValues: {
             guests: '',
@@ -63,12 +62,12 @@ export function BookingForm() {
 
     const availability = [
         ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '7:30 PM', '8:00 PM'],
-        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM'],
-        ['11:00 AM', '11:30 AM', '12:00 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '5:00 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM']
+        ['11:01 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '7:30 PM', '8:00 PM'],
+        ['11:02 AM', '11:30 AM', '12:00 PM', '12:30 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM'],
+        ['11:03 AM', '11:30 AM', '12:00 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['1:04 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['11:05 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '5:00 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
+        ['4:06 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM']
     ];
 
     const onClick = () => {
@@ -99,12 +98,15 @@ export function BookingForm() {
                     </div>
                     <div className="date">
                         <label htmlFor='date'>Date</label>
+                        <input id='date' type='text' className='form-control visually-hidden' value={formik.values.date} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         <DateComponent
+                            id='visible-date'
                             selected={formik.values.date}
                             className={formik.touched.date && formik.errors.date ? "form-control error date" : "form-control"}
                             onChange={(d) => formik.setFieldValue('date', d)}
                             onChangeRaw={(e) => formik.setFieldTouched('date', e.target.value)}
                             onBlur={formik.handleBlur}
+                            ariaHidden
                             required
                         />
                     </div>
@@ -121,8 +123,8 @@ export function BookingForm() {
                             onBlur={formik.handleBlur}
                             required
                         >
-                            <option value=''>Select Time</option>
-                            {availabilityForDay.map((time, index) => <option className="dropdown-item" value={time} key={index}>{time}</option>)}
+                            <option value='Select Time'>Select Time</option>
+                            {availabilityForDay.map((time, index) => <option data-testid='time-option' className="dropdown-item" value={time} key={index}>{time}</option>)}
                         </select>
                     </div>
                 </div >
