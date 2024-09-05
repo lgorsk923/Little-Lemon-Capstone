@@ -8,6 +8,7 @@ import { Menu } from './Pages/Menu';
 import { Booking } from './Pages/Booking/Booking';
 import { Order } from './Pages/Order';
 import { LoginSignup } from './Pages/Login-Signup';
+import { ConfirmedBooking } from './Pages/Booking/ConfirmedBooking';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Menu" element={<Menu />} />
-        <Route path="/Reservations" element={<Booking />} />
+        <Route path="/Reservations/*" element={<Booking />} />
         <Route path="/Order" element={<Order />} />
         <Route path="/Login-Signup" element={<LoginSignup />} />
+        <Route path="/ConfirmedBooking" element={<ConfirmedBooking />} />
       </Routes>
       <Footer />
 

@@ -5,8 +5,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { DateComponent } from '../../components/Date';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { fetchAPI } from '../../api';
 
-export function BookingForm() {
+export function BookingForm({ formSubmission }) {
     const formik = useFormik({
         initialValues: {
             guests: '',
@@ -47,36 +48,17 @@ export function BookingForm() {
             confirmButton: Yup.boolean().oneOf([true], 'You must confirm the information above is accurate to submit your booking'),
         }),
         onSubmit:
-            (values, { resetForm }) => {
-                if (formik.isValid) {
-                    console.log('Form submitted:', values);
-                    alert('Your reservation has been submitted! We will send you a confirmation email shortly.');
-                    resetForm();
-                } else {
-                    alert('Please fill out all required fields before submitting your reservation.');
-                }
-            }
+            (values) => formSubmission(values)
     });
 
-    const availability = [
-        ['11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['11:01 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '7:30 PM', '8:00 PM'],
-        ['11:02 AM', '11:30 AM', '12:00 PM', '12:30 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM', '6:30 PM'],
-        ['11:03 AM', '11:30 AM', '12:00 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['1:04 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '4:00 PM', '4:30 PM', '5:00 PM', "5:30 PM", '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['11:05 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '5:00 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM'],
-        ['4:06 PM', '4:30 PM', '5:00 PM', "5:30 PM", '6:00 PM']
-    ];
-
-    const onClick = () => {
-        !formik.isValid ? alert('Please fill out all required fields before submitting your reservation.') : formik.handleSubmit();
-    };
-
-    const dayOfWeek = new Date(formik.values.date).getDay();
-    const availabilityForDay = availability[dayOfWeek];
-
+    const availability = fetchAPI(formik.values.date);
+    function availabilityError() {
+        return (
+            <div className='error-message'>We are sorry, but we are fully booked for the selected date. Please select another date.</div>
+        )
+    }
     return (
-        <form onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e) }} data-testid='booking-form'>
+        <form data-testid='booking-form' onSubmit={formik.handleSubmit}>
             <fieldset className='scheduleCheck'>
                 <h1 className="scheduleCheckTitle">Tell us about your Party!</h1>
                 <div id='scheduleChecker' className='scheduleCheckInputs'>
@@ -122,7 +104,7 @@ export function BookingForm() {
                             required
                         >
                             <option value='Select Time'>Select Time</option>
-                            {availabilityForDay.map((time, index) => <option data-testid='time-option' className="dropdown-item" value={time} key={index}>{time}</option>)}
+                            {availability.map((time, index) => <option data-testid='time-option' className="dropdown-item" value={time} key={index}>{time}</option>)}
                         </select>
                     </div>
                 </div >
@@ -250,7 +232,7 @@ export function BookingForm() {
                             {formik.touched.confirmButton && formik.errors.confirmButton ? <div data-testid='validation-field' className='error-message'>{formik.errors.confirmButton}</div> : null}
                         </div>
                         <div className="col bookButton">
-                            <Button testId='submit' type='submit' onClick={onClick} textVariant=' Book My Table' />
+                            <Button testId='submit' type='submit' onClick={formik.handleSubmit} textVariant=' Book My Table' />
                         </div>
                     </div>
                 </fieldset>

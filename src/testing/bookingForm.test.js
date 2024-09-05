@@ -2,11 +2,13 @@ import '@testing-library/jest-dom';
 import { render, fireEvent, screen, cleanup, act, waitFor, } from '@testing-library/react';
 import { BookingForm } from '../Pages/Booking/BookingForm';
 import userEvent from '@testing-library/user-event';
+import { submitAPI, fetchAPI } from '../api';
+
 
 afterEach(() => cleanup());
 
 test('Renders second half of form', () => {
-    render(<BookingForm />);
+    render(<BookingForm />)
 
     const ContactHeading = screen.getByText('Complete Your Booking!');
 
@@ -27,13 +29,11 @@ test('time options are updating depending on the date selected', () => {
     const timeSelection = screen.getByText('Select Time');
 
     fireEvent.change(dateInput, { target: { value: '09/30/2024' } });
-
+    let result = fetchAPI('09/30/2024');
     expect(dateInput).toHaveValue('09/30/2024');
-
     let availability = screen.getAllByTestId('time-option');
-
     expect(timeSelection).toHaveValue('Select Time');
-    expect(availability).toHaveLength(15);
+    expect(availability).toHaveLength(result.length);
 });
 
 test('new time is saved when selected', () => {
@@ -49,7 +49,6 @@ test('new time is saved when selected', () => {
 });
 
 test('onSubmit function is called only when all fields are correctly filled', async () => {
-
     const mockSubmit = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
     const { getByTestId } = render(<BookingForm />);
@@ -58,7 +57,7 @@ test('onSubmit function is called only when all fields are correctly filled', as
     const guests = screen.getByLabelText('Guests');
     const dateInput = screen.getByLabelText('Date');
     const timeSelection = screen.getByLabelText('Time');
-    const availability = screen.getAllByTestId('time-option');
+    const availability = await screen.getAllByTestId('time-option');
     const firstName = screen.getByLabelText('First Name');
     const lastName = screen.getByLabelText('Last Name');
     const email = screen.getByLabelText('Email Address');
@@ -67,7 +66,7 @@ test('onSubmit function is called only when all fields are correctly filled', as
 
     act(() => { fireEvent.change(guests, { target: { value: '2' } }) });
     act(() => { fireEvent.change(dateInput, { target: { value: '09/30/2024' } }) });
-    act(() => { userEvent.selectOptions(timeSelection, availability[2]) });
+    await act(() => { userEvent.selectOptions(timeSelection, availability[2]) });
     act(() => { fireEvent.change(firstName, { target: { value: 'John' } }) });
     act(() => { fireEvent.change(lastName, { target: { value: 'Doe' } }) });
     act(() => { fireEvent.change(email, { target: { value: '123@gmail.com' } }) });
@@ -77,4 +76,5 @@ test('onSubmit function is called only when all fields are correctly filled', as
 
     await waitFor(() => expect(mockSubmit).toHaveBeenCalledWith('Your reservation has been submitted! We will send you a confirmation email shortly.'));
 
+    mockSubmit.mockRestore();
 });
