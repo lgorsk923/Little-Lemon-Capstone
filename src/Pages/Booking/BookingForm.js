@@ -4,8 +4,6 @@ import { React } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { DateComponent } from '../../components/Date';
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function BookingForm() {
