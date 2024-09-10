@@ -52,11 +52,6 @@ export function BookingForm({ formSubmission }) {
     });
 
     const availability = fetchAPI(formik.values.date);
-    function availabilityError() {
-        return (
-            <div className='error-message'>We are sorry, but we are fully booked for the selected date. Please select another date.</div>
-        )
-    }
     return (
         <form data-testid='booking-form' onSubmit={formik.handleSubmit}>
             <fieldset className='scheduleCheck'>
@@ -232,7 +227,7 @@ export function BookingForm({ formSubmission }) {
                             {formik.touched.confirmButton && formik.errors.confirmButton ? <div data-testid='validation-field' className='error-message'>{formik.errors.confirmButton}</div> : null}
                         </div>
                         <div className="col bookButton">
-                            <Button testId='submit' type='submit' onClick={formik.handleSubmit} textVariant=' Book My Table' />
+                            <Button testId='submit' type='submit' onClick={formik.handleSubmit} textVariant='Book My Table' />
                         </div>
                     </div>
                 </fieldset>

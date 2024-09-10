@@ -14,7 +14,7 @@ export function fetchAPI(selectedDate) {
     if (!(selectedDate instanceof Date)) {
         selectedDate = new Date(selectedDate);
     };
-    var submissionData = JSON.parse(localStorage.getItem('Date and Time'));
+    var submissionData = submissionData ? JSON.parse(localStorage.getItem('Date and Time')) : [];
     let bookedTimes = submissionData ? submissionData
         .filter((data) => new Date(data.date).toDateString() === selectedDate.toDateString())
         .map((data) => data.time) : [];
