@@ -9,7 +9,7 @@ export function DateComponent({ selected, onChange, onChangeRaw, className, id }
         ({ value, onClick, className, id }, ref) => (
             <div className="input-group">
                 <div className='input-group-append'>
-                    <span className='input-group-text'>
+                    <span aria-label='calendar icon, not clickable' className='input-group-text'>
                         <FaCalendarAlt />
                     </span>
                 </div>

@@ -16,7 +16,7 @@ export function Specials() {
                 <p className="specials__item-description">{special.description}</p>
                 <div className="delivery">
                     <h3>Order a Delivery</h3>
-                    <img className='scooter' src={scooter} alt="scooter" />
+                    <img className='scooter' aria-label='delivery icon not clickable' src={scooter} alt="scooter" />
                 </div>
             </div>
 

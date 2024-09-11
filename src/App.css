@@ -107,9 +107,9 @@ h1.hero__title{
   background-color: #F3CD17;
   font-family: 'Karla-Medium', sans-serif !important;
   font-size: 18px;
-  border-radius: 16px;
+  border-radius: 16px !important;
   margin: 1rem 1rem;
-  box-shadow: 2px 2px 2px #D9D9D9;
+  box-shadow: 2px 2px 2px #b1afaf;
 }
 
 .btn-warning:hover{
@@ -117,4 +117,13 @@ h1.hero__title{
   font-family: 'Karla-Bold', sans-serif !important;
   color: #495D57;
   border: #495D57 5px;
+}
+
+.btn-warning:disabled{
+  background-color: #F3CD17;
+  font-family: 'Karla-Medium', sans-serif !important;
+  font-size: 18px;
+  border-radius: 16px;
+  margin: 1rem 1rem;
+  box-shadow: none;
 }

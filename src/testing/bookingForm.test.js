@@ -100,6 +100,29 @@ test('onSubmit function is called only when all fields are correctly filled', as
     await waitFor(() => expect(mockSubmit).toHaveBeenCalledTimes(1));
 });
 
+test('client-side validation is triggered when a field is left blank or incorrectly filled', async () => {
+    render(<BookingForm />);
+
+    const guests = screen.getByLabelText('Guests');
+    const date = screen.getByLabelText('Date');
+    const time = screen.getByLabelText('Time');
+    const availability = await screen.getAllByTestId('time-option');
+
+    act(() => { fireEvent.change(guests, { target: { value: '0' } }) });
+    act(() => { fireEvent.blur(guests) });
+    act(() => { fireEvent.change(date, { target: { value: '2023-09-30T05:00:00.000Z' } }) });
+    act(() => { fireEvent.blur(date) });
+    await act(() => { userEvent.selectOptions(time, availability[2]) });
+
+    await waitFor(() => {
+        const validationField = screen.getByTestId('validation-field');
+        const children = Array.from(validationField.children);
+        const errorMessages = children.map((child) => child.textContent);
+        expect(errorMessages[0]).toBe('There must be at least one guest');
+        expect(errorMessages[1]).toBe('The date you selected has already passed.');
+    });
+});
+
 test("the  booking's dates and times are being saved to local storage", async () => {
 
     const localStorageMock = new LocalStorageMock();

@@ -103,10 +103,10 @@ export function BookingForm({ formSubmission }) {
                         </select>
                     </div>
                 </div >
-                <div>
-                    {formik.touched.guests && formik.errors.guests ? <div data-testid='validation-field' className='schedule-check-error'>{formik.errors.guests}</div> : null}
-                    {formik.touched.date && formik.errors.date ? <div data-testid='validation-field' className='schedule-check-error'>{formik.errors.date}</div> : null}
-                    {formik.touched.time && formik.errors.time ? <div data-testid='validation-field' className='schedule-check-error'>{formik.errors.time}</div> : null}
+                <div data-testid='validation-field' >
+                    {formik.touched.guests && formik.errors.guests ? <div className='schedule-check-error'>{formik.errors.guests}</div> : null}
+                    {formik.touched.date && formik.errors.date ? <div className='schedule-check-error'>{formik.errors.date}</div> : null}
+                    {formik.touched.time && formik.errors.time ? <div className='schedule-check-error'>{formik.errors.time}</div> : null}
                 </div>
             </fieldset>
             <div className='infoInput'>
@@ -130,7 +130,7 @@ export function BookingForm({ formSubmission }) {
                                     placeholder=' '
                                     required
                                 />
-                                {formik.touched.firstName && formik.errors.firstName ? <div data-testid='validation-field' className='error-message'>{formik.errors.firstName}</div> : null}
+                                {formik.touched.firstName && formik.errors.firstName ? <div className='error-message'>{formik.errors.firstName}</div> : null}
                             </div>
                             <div className="col lastName">
                                 <label htmlFor="lastName">Last Name</label>
@@ -144,7 +144,7 @@ export function BookingForm({ formSubmission }) {
                                     onBlur={formik.handleBlur}
                                     required
                                 />
-                                {formik.touched.lastName && formik.errors.lastName ? <div data-testid='validation-field' className='error-message'>{formik.errors.lastName}</div> : null}
+                                {formik.touched.lastName && formik.errors.lastName ? <div className='error-message'>{formik.errors.lastName}</div> : null}
                             </div>
                         </div>
                         <div className="row phemail">
@@ -160,7 +160,7 @@ export function BookingForm({ formSubmission }) {
                                     onBlur={formik.handleBlur}
                                     required
                                 />
-                                {formik.touched.email && formik.errors.email ? <div data-testid='validation-field' className='error-message'>{formik.errors.email}</div> : null}
+                                {formik.touched.email && formik.errors.email ? <div className='error-message'>{formik.errors.email}</div> : null}
                             </div>
                             <div className="col number">
                                 <label htmlFor="phone" className='phone'>
@@ -178,7 +178,7 @@ export function BookingForm({ formSubmission }) {
                                     onBlur={formik.handleBlur}
                                     required
                                 />
-                                {formik.touched.phone && formik.errors.phone ? <div data-testid='validation-field' className='error-message'>{formik.errors.phone}</div> : null}
+                                {formik.touched.phone && formik.errors.phone ? <div className='error-message'>{formik.errors.phone}</div> : null}
                             </div>
                         </div>
                         <div className="row occasion">
@@ -224,10 +224,10 @@ export function BookingForm({ formSubmission }) {
                             <label className="form-check-label" htmlFor="confirmButton">
                                 Check here to confirm the above information is accurate
                             </label>
-                            {formik.touched.confirmButton && formik.errors.confirmButton ? <div data-testid='validation-field' className='error-message'>{formik.errors.confirmButton}</div> : null}
+                            {formik.touched.confirmButton && formik.errors.confirmButton ? <div className='error-message'>{formik.errors.confirmButton}</div> : null}
                         </div>
                         <div className="col bookButton">
-                            <Button testId='submit' type='submit' onClick={formik.handleSubmit} textVariant='Book My Table' />
+                            <Button testId='submit' type='submit' onClick={formik.handleSubmit} ariaLabel='Submit Information on Click' textVariant='Book My Table' disabled={!(formik.isValid && formik.dirty)} />
                         </div>
                     </div>
                 </fieldset>
